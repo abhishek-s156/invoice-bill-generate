@@ -1,0 +1,18 @@
+{% extends 'invoices/base.html' %}
+{% block title %}EasyBill - Simple Invoicing{% endblock %}
+
+{% block content %}
+<div class="card" style="text-align:center; padding: 60px 24px;">
+    <h1>Send Invoices. Get Paid. Stay Simple.</h1>
+    <p style="color:#555; font-size:16px; max-width:500px; margin: 10px auto 30px;">
+        EasyBill is a tiny invoicing tool for freelancers. Create clients,
+        send invoices, and track who has paid you. Free to start.
+    </p>
+    {% if user.is_authenticated %}
+        <a href="{% url 'dashboard' %}" class="btn">Go to Dashboard</a>
+    {% else %}
+        <a href="{% url 'signup' %}" class="btn">Get Started Free</a>
+        <a href="{% url 'pricing' %}" class="btn btn-gray">See Pricing</a>
+    {% endif %}
+</div>
+{% endblock %}

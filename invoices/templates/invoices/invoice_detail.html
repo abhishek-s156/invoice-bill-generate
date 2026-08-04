@@ -1,0 +1,23 @@
+{% extends 'invoices/base.html' %}
+{% block title %}Invoice #{{ invoice.id }} - EasyBill{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>{{ invoice.title }}</h2>
+    <span class="badge badge-{{ invoice.status }}">{{ invoice.get_status_display }}</span>
+
+    <table style="margin-top:18px;">
+        <tr><th>Client</th><td>{{ invoice.client.name }} ({{ invoice.client.email }})</td></tr>
+        <tr><th>Amount</th><td>${{ invoice.amount }}</td></tr>
+        <tr><th>Due Date</th><td>{{ invoice.due_date }}</td></tr>
+        <tr><th>Created</th><td>{{ invoice.created_at }}</td></tr>
+    </table>
+
+    {% if invoice.status != 'paid' %}
+    <form method="POST" action="{% url 'mark_invoice_paid' invoice.id %}" style="margin-top:20px;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-green">Mark as Paid</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'invoices/base.html' %}
+{% block title %}Dashboard - EasyBill{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+            <h2 style="margin-bottom:4px;">Your Dashboard</h2>
+            {% if profile.is_pro %}
+                <span class="badge badge-pro">PRO PLAN</span>
+            {% else %}
+                <span class="badge badge-free">FREE PLAN</span>
+            {% endif %}
+        </div>
+        {% if not profile.is_pro %}
+            <a href="{% url 'pricing' %}" class="btn btn-green">Upgrade to Pro</a>
+        {% endif %}
+    </div>
+
+    {% if not profile.is_pro %}
+        <p style="margin-top:14px; color:#555; font-size:14px;">
+            Free plan: {{ invoice_count }} / 3 invoices used.
+            {% if limit_reached %}
+                <strong style="color:#b91c1c;"> You have reached your limit — upgrade to add more.</strong>
+            {% endif %}
+        </p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h3 style="margin:0;">Your Invoices</h3>
+        <a href="{% url 'add_invoice' %}" class="btn">+ New Invoice</a>
+    </div>
+
+    {% if invoice_list %}
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Client</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Due Date</th>
+        </tr>
+        {% for invoice in invoice_list %}
+        <tr>
+            <td><a href="{% url 'invoice_detail' invoice.id %}">{{ invoice.title }}</a></td>
+            <td>{{ invoice.client.name }}</td>
+            <td>${{ invoice.amount }}</td>
+            <td>
+                <span class="badge badge-{{ invoice.status }}">{{ invoice.get_status_display }}</span>
+            </td>
+            <td>{{ invoice.due_date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p style="color:#777;">You have no invoices yet. Create your first one above.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'invoices/base.html' %}
+{% block title %}Clients - EasyBill{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h2 style="margin:0;">Your Clients</h2>
+        <a href="{% url 'add_client' %}" class="btn">+ Add Client</a>
+    </div>
+
+    {% if clients %}
+    <table>
+        <tr><th>Name</th><th>Email</th></tr>
+        {% for client in clients %}
+        <tr>
+            <td>{{ client.name }}</td>
+            <td>{{ client.email }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p style="color:#777;">No clients yet. Add one to start sending invoices.</p>
+    {% endif %}
+</div>
+{% endblock %}

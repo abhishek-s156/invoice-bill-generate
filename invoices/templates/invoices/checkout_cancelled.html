@@ -1,0 +1,10 @@
+{% extends 'invoices/base.html' %}
+{% block title %}Payment Cancelled - EasyBill{% endblock %}
+
+{% block content %}
+<div class="card" style="text-align:center; padding:50px;">
+    <h2>Payment Cancelled</h2>
+    <p style="color:#555;">No worries, you have not been charged. You can try again anytime.</p>
+    <a href="{% url 'pricing' %}" class="btn">Back to Pricing</a>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'invoices/base.html' %}
+{% block title %}Pricing - EasyBill{% endblock %}
+
+{% block content %}
+<h2 style="text-align:center;">Simple Pricing</h2>
+
+<div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin-top:20px;">
+
+    <div class="card" style="width:280px;">
+        <h3>Free</h3>
+        <p style="font-size:28px; font-weight:bold;">$0<span style="font-size:14px; color:#777;">/mo</span></p>
+        <ul style="color:#555; font-size:14px; line-height:1.8;">
+            <li>Up to 3 invoices</li>
+            <li>Unlimited clients</li>
+            <li>Basic invoice tracking</li>
+        </ul>
+        {% if not user.is_authenticated %}
+            <a href="{% url 'signup' %}" class="btn btn-gray" style="width:100%; text-align:center;">Start Free</a>
+        {% endif %}
+    </div>
+
+    <div class="card" style="width:280px; border: 2px solid #2563eb;">
+        <h3>Pro</h3>
+        <p style="font-size:28px; font-weight:bold;">$9<span style="font-size:14px; color:#777;">/mo</span></p>
+        <ul style="color:#555; font-size:14px; line-height:1.8;">
+            <li>Unlimited invoices</li>
+            <li>Unlimited clients</li>
+            <li>Priority support</li>
+        </ul>
+        {% if user.is_authenticated %}
+            <a href="{% url 'create_checkout_session' %}" class="btn" style="width:100%; text-align:center;">Upgrade Now</a>
+        {% else %}
+            <a href="{% url 'signup' %}" class="btn" style="width:100%; text-align:center;">Sign Up to Upgrade</a>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

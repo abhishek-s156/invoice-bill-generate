@@ -1,0 +1,34 @@
+{% extends 'invoices/base.html' %}
+{% block title %}New Invoice - EasyBill{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:450px;">
+    <h2>Create Invoice</h2>
+
+    {% if clients %}
+    <form method="POST">
+        {% csrf_token %}
+        <label>Client</label>
+        <select name="client" required>
+            {% for client in clients %}
+                <option value="{{ client.id }}">{{ client.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Title / Description</label>
+        <input type="text" name="title" required placeholder="e.g. Website redesign">
+
+        <label>Amount ($)</label>
+        <input type="number" step="0.01" name="amount" required placeholder="e.g. 500.00">
+
+        <label>Due Date</label>
+        <input type="date" name="due_date" required>
+
+        <button type="submit" class="btn">Create Invoice</button>
+    </form>
+    {% else %}
+        <p>You need at least one client before creating an invoice.</p>
+        <a href="{% url 'add_client' %}" class="btn">Add a Client First</a>
+    {% endif %}
+</div>
+{% endblock %}

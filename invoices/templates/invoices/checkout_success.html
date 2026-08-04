@@ -1,0 +1,13 @@
+{% extends 'invoices/base.html' %}
+{% block title %}Payment Successful - EasyBill{% endblock %}
+
+{% block content %}
+<div class="card" style="text-align:center; padding:50px;">
+    <h2>🎉 Payment Successful!</h2>
+    <p style="color:#555;">
+        Thank you for upgrading to Pro. It may take a few seconds for your
+        account to update (Stripe sends us a webhook in the background).
+    </p>
+    <a href="{% url 'dashboard' %}" class="btn">Go to Dashboard</a>
+</div>
+{% endblock %}

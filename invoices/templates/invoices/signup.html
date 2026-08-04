@@ -1,0 +1,26 @@
+{% extends 'invoices/base.html' %}
+{% block title %}Sign Up - EasyBill{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:400px; margin:0 auto;">
+    <h2>Create your free account</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Username</label>
+        {{ form.username }}
+        <label>Password</label>
+        {{ form.password1 }}
+        <label>Confirm Password</label>
+        {{ form.password2 }}
+        <button type="submit" class="btn" style="width:100%;">Sign Up</button>
+    </form>
+    {% if form.errors %}
+        <p style="color:red; font-size:13px; margin-top:10px;">
+            Please fix the errors above and try again.
+        </p>
+    {% endif %}
+    <p style="margin-top:14px; font-size:14px;">
+        Already have an account? <a href="{% url 'login' %}">Log in</a>
+    </p>
+</div>
+{% endblock %}
