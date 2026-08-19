@@ -1,7 +1,7 @@
 """
 admin.py
 --------
-Registers our models with Django's built-in admin panel
+Register our models with Django's built-in admin panel
 (visible at /admin/) so we can view/edit data without
 writing any extra code.
 """
