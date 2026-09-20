@@ -1,5 +1,5 @@
 """
-ASGI config for easybill project.
+ASGI config for easybill project......
 //
 It exposes the ASGI callable as a module-level variable named ``application``.
 
